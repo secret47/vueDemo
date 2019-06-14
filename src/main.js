@@ -7,7 +7,7 @@ import store from './store'
 import 'amfe-flexible'
 import axios from 'axios'
 import setAxios from './assets/setAxios'
-
+import './mock/mock.js'
 setAxios();
 
 Vue.config.productionTip = false
