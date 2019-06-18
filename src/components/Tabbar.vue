@@ -1,8 +1,12 @@
 <template>
-  <cube-tab-bar class="tabbar" v-model="selectedLabelDefault" :data="tabs" @click="clickHandler" @change="changeHandler">
-  </cube-tab-bar>
+  <div>
+    <cube-tab-bar class="tabbar" v-model="selectedLabelDefault" :data="tabs" @click="clickHandler" @change="changeHandler">
+    </cube-tab-bar>
+    <span class="countSum">{{countSum}}</span>
+  </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -27,6 +31,11 @@ export default {
       ]
     };
   },
+  computed:{
+    ...mapGetters({
+      countSum:'countSum'
+    })
+  },
   methods: {
     clickHandler(label) {
       // if you clicked home tab, then print 'Home'
@@ -44,7 +53,7 @@ export default {
         case "购物车":
           this.$router.replace("/cart");
           break;
-         case "我的":
+        case "我的":
           this.$router.replace("/mine");
           break;
       }
@@ -63,5 +72,19 @@ export default {
 }
 .tabbar .cube-tab div {
   font-size: 14px;
+}
+.countSum {
+  display: block;
+  position: fixed;
+  bottom: 50px;
+  right: 25%;
+  z-index: 1001;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff0000;
+  line-height: 20px;
+  font-size: 13px;
+  color: #ffffff;
 }
 </style>

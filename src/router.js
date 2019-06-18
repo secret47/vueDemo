@@ -34,16 +34,25 @@ export default new Router({
     {
       path: '/catalog',
       name: 'catalog',
+      meta:{
+        requireAuth:true,//
+      },
       component: () => import('./views/Catalog.vue')
     },
     {
       path: '/cart',
       name: 'cart',
+      meta:{
+        requireAuth:true,//
+      },
       component: () => import('./views/Cart.vue')
     },
     {
       path: '/mine',
       name: 'mine',
+      meta:{
+        requireAuth:true,//
+      },
       component: () => import('./views/Mine.vue')
     },
   ]

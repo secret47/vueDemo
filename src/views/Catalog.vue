@@ -1,23 +1,25 @@
 <template>
-    <div class="panelBox">
-        <cube-scroll class="leftPanel">
-            <ul>
-                <li v-for="(item,index) in leftPanelsData " :key="index" :class="item.active ?'active':'default'">
-                    {{item.label}}
-                </li>
-            </ul>
-        </cube-scroll>
-        <cube-scroll class="rightPanel">
-            <ul>
-                <li v-for="(item,index) in rightPanelsData " :key="index" :class="item.active ?'active':'default'">
-                    <a href="">
-                        <img :src="item.imgUrl" alt="">
-                        <p>{{item.name}}</p>
-                    </a>
-                </li>
-            </ul>
-        </cube-scroll>
-    </div>
+  <div class="panelBox">
+    <cube-scroll class="leftPanel">
+      <ul>
+        <li v-for="(item,index) in leftPanelsData " @click="getRight(index)" :key="index" :class="item.active ?'active':'default'">
+          {{item.label}}
+        </li>
+      </ul>
+    </cube-scroll>
+    <cube-scroll class="rightPanel">
+      <ul>
+        <li v-for="(item,index) in rightPanelsData " class="items" :key="index">
+          <a href="">
+            <img :src="item.imgUrl" alt="">
+            <label>{{item.name}}
+              <i class="cubeic-add" @click="addCart($event,item)"></i>
+            </label>
+          </a>
+        </li>
+      </ul>
+    </cube-scroll>
+  </div>
 </template>
 <script>
 export default {
@@ -164,11 +166,25 @@ export default {
     };
   },
   methods: {
-    async getCatalog(index) {}
+    async getRight(index) {},
+    async getCatalog(index) {},
+    //增加上品
+    addCart: function(e, item) {
+      e.preventDefault();
+
+      console.log(e);
+      this.$store.commit("addCart", item);
+    }
   },
   created() {
     //获取初始化的分类
     this.getCatalog("0");
+  },
+  mounted() {
+    var panBoxHeight = document.querySelector(".panelBox");
+    panBoxHeight.style.height =
+      document.documentElement.clientHeight - 60 + "px";
+    console.log(document.documentElement.clientHeight - 60);
   }
 };
 </script>
@@ -210,5 +226,10 @@ export default {
 .rightPanel img {
   width: 80px;
   height: 80px;
+}
+.items label {
+  display: block;
+  height: 50px;
+  line-height: 50px;
 }
 </style>

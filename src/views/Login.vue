@@ -99,7 +99,12 @@ export default {
           //登录成功
           this.$store.commit("setToken", result.data.token);
           window.localStorage.setItem("token", result.data.token);
-          this.$router.replace('/index')
+          this.$router.replace("/index");
+          if (this.$route.query.redirect) {
+            this.$router.replace(this.$route.query.redirect);
+          } else {
+            this.$router.replace("/index");
+          }
         } else {
           alert(result.data.msg);
         }

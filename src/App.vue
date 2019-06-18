@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view class="contains"/>
     <tabbar></tabbar>
   </div>
 </template>
@@ -10,6 +10,9 @@ import tabbar from "./components/Tabbar";
 export default {
   components: {
     tabbar
+  },
+  created(){
+
   }
 };
 </script>
