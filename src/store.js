@@ -3,10 +3,10 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+let store = new Vuex.Store({
 	state: {
 		token: '',
-		cartArr: [] //购物车
+		cartArr: JSON.parse(localStorage.getItem('cartArr')) || [] //购物车,localstorage有就拿里面的，没有就为空
 	},
 	mutations: {
 		//设置vuex的token
@@ -41,7 +41,7 @@ export default new Vuex.Store({
 			}
 		},
 		//清空购物车
-		clearCarts(state){
+		clearCarts(state) {
 			state.cartArr = []
 		}
 	},
@@ -59,3 +59,10 @@ export default new Vuex.Store({
 		}
 	}
 })
+
+store.subscribe((mutations, state) => {
+	//存数据
+	localStorage.setItem('cartArr', JSON.stringify(state.cartArr))
+})
+
+export default store;
